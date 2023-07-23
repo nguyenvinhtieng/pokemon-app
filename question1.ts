@@ -1,3 +1,5 @@
+"use strict";
+
 const MAXIMUM_GROUP_SIZE = 3;
 
 function shuffleArray<T>(array: T[]): T[] {

@@ -21,22 +21,22 @@ export default function PokemonItem({pokemon, handleClick, types}) {
             <div className='pokemon__id'>
                 <span>#{pokemon.number}</span>
             </div>
-            <div className='pokemon__name'>
+            <p className='pokemon__name'>
                 {pokemon.name}
-            </div>
-            <div className="pokemon__types">
-                {pokemon?.type_1 ? <div className="pokemon__type">
+            </p>
+            <ul className="pokemon__types">
+                {pokemon?.type_1 ? <li className="pokemon__type">
                     <img src={`/types/${types.find(type => type.id == pokemon?.type_1).name}.png`} alt={types.find(type => type.id == pokemon?.type_1).name} />
-                </div> : ""}
+                </li> : ""}
 
-                {pokemon?.type_2 ? <div className="pokemon__type">
+                {pokemon?.type_2 ? <li className="pokemon__type">
                     <img src={`/types/${types.find(type => type.id == pokemon?.type_2).name}.png`} alt={types.find(type => type.id == pokemon?.type_2).name} />
-                </div> : ""}
+                </li> : ""}
 
-                {(!pokemon?.type_1 && !pokemon?.type_2) ? <div className="pokemon__type">
+                {(!pokemon?.type_1 && !pokemon?.type_2) ? <li className="pokemon__type">
                     <img src="/types/Unknow.png" alt="" />
-                </div> : "" }
-            </div>
+                </li> : "" }
+            </ul>
             {pokemon.legendary == 1 && <p className='pokemon__legendary'>Legendary Pokemon</p>}
             <div className="pokemon__info">
                 <div className="pokemon__data">

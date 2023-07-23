@@ -2,6 +2,9 @@
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+    &.is-fixed {
+        overflow: hidden;
+    }
 }
 .container {
 
@@ -131,12 +134,6 @@ body {
     }
 }
 
-
-
-
-
-
-
 .legendary {
     position: relative;
     overflow: hidden;
@@ -149,6 +146,10 @@ body {
         background-size: 300% 300%;
         animation: colorTransition2 2s ease-in-out infinite;
         box-shadow: rgba(149, 157, 165, 0.6) 0px 8px 24px;
+    }
+    .pokemon__bar--value {
+        color: red;
+        -webkit-text-stroke: 1px black;
     }
     .pokemon__id {
         color: #fff;

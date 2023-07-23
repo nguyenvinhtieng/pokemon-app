@@ -14,12 +14,21 @@ export default function PokemonList({pokemons, types}) {
         setIsShowModal(!isShowModal);
     }
     const handleClickPokemonItem = ({id, top, left}) => {
-        // console.log("TOP")
         setCurrentPokemonId(id);
         setTop(top);
         setLeft(left);
         handleToggleModal();
     }
+
+    // detech isShowModal change
+    useEffect(() => {
+        if (isShowModal) {
+            document.body.classList.add("is-fixed");
+        } else {
+            document.body.classList.remove("is-fixed");
+        }
+    }, [isShowModal])
+
     
     return (
         <>
