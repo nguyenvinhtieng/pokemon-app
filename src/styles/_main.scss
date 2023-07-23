@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+.container {
+
+}
+.inner {
+    padding: 16px;
+    max-width: 1000px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.p-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -20px -20px;
+    @media (max-width: 600px) {
+        margin: 0 0 -40px 0;
+    }
+    &__item {
+        cursor: pointer;
+        width: calc(100% / 3 - 40px);
+        margin: 20px 20px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        padding: 20px;
+        position: relative;
+        border-radius: 10px;
+        @media (max-width: 1000px) {
+            width: calc(100% / 2 - 40px);
+        }
+        @media (max-width: 600px) {
+            width: calc(100%);
+            margin: 0 0 40px 0;
+        }
+        
+    }
+    &__inner {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+}
+
+@keyframes colorTransition {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes bgRotateAnim {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+.legendary {
+    position: relative;
+    overflow: hidden;
+    // background-color: #eee;
+    .pokemon__id {
+        color: #000;
+    }
+    &.large {
+        &::before {
+            height: 200%;
+        }
+        &::after {
+            top: 8px;
+            left: 8px;
+            bottom: 8px;
+            right: 8px;
+        }
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 140%;
+        background: linear-gradient(#00ccff, #d400d4);
+        z-index: -1;
+        animation: bgRotateAnim 4s linear infinite;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        bottom: 4px;
+        right: 4px;
+        z-index: -1;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+}
+
+
+.u-mt-20 {
+    margin-top: 20px;
+}
+.u-mb-20 {
+    margin-bottom: 20px;
+}

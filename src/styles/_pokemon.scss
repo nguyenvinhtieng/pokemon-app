@@ -1,0 +1,330 @@
+.pokemon {
+    position: relative;
+    &__img {
+        transform-origin: 50% 100%;
+        transition: transform 0.3s ease-in-out;
+        height: 96px;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            max-height: 96px;
+        }
+        &.large {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            img {
+                min-height: 160px;
+            }
+        }
+    }
+    &__img-anim {
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url(/pokemons/pokeball.gif) no-repeat center center;
+            background-size: cover;
+            animation: pokemonShowAnim 2s ease-in-out forwards;
+            animation-delay: 1s;
+            // filter: grayscale(100%);
+            border-radius: 5px;
+        }
+        @keyframes  pokemonShowAnim {
+            to {
+                width: 0;
+                height: 0;
+                opacity: 0;
+            }
+        }
+    }
+    &__name {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 20px;
+        color: #635f58;
+        text-align: center;
+    }
+    &__id {
+        position: absolute;
+        top: 26px;
+        left: 26px;
+        right: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 25px;
+        color: #eae9e8;
+        // transform: translateY(-100%);
+        font-weight: 700;
+        z-index: 1;
+    }
+    &__legendary {
+        margin: 8px 0;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        background: -webkit-linear-gradient(180deg , #FFEB3B,#F44336);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    &__info {
+        margin-top: 12px;
+        width: 100%;
+    }
+    &__data {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        & + .pokemon__data {
+            margin-top: 8px;
+        }
+    }
+    &__txt {
+        width: 70px;
+        font-size: 13px;
+        text-align: right;
+        padding-right: 9px;
+    }
+    &__bar {
+        width: calc(100% - 70px);
+        height: 10px;
+        background-color: #eae9e8;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        &.attack {
+            &::before {
+                background-color: #f3e577;
+            }
+        }
+        &.hp {
+            &::before {
+                background-color: #ff6969;
+            }
+        }
+        &.defence {
+            &::before {
+                background-color: #858585;
+            }
+        }
+        &.sp_atk {
+            &::before {
+                background-color: #ff14ad;
+            }
+        }
+        &.sp_def {
+            &::before {
+                background-color: #a40def;
+            }
+        }
+        &.speed {
+            &::before {
+                background-color: #00d4ff;
+            }
+        }
+        &.total {
+            &::before {
+                background-color: #f3701a;
+            }   
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: var(--width);
+            background-color: #f3701a;
+            border-radius: 10px;
+            animation: barAnim 1s ease-in-out;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 30px;
+            height: 100%;
+            // border-radius: 10px;
+            transform: skewX(-45deg);
+            animation: barAnimWhite 2s linear infinite;
+        }
+        &--value {
+            position: absolute;
+            font-size: 10px;
+            top: 52%;
+            left: 50%;
+            line-height: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+    &__types {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 12px 0;
+    }
+    &__type {
+        width: 40px;
+        height: 40px;
+        margin: 0 12px;
+    }
+    &-types {
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        justify-content: center;
+    }
+    &-type {
+        padding: 10px 20px;
+        background: #fff;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        // width: calc(100% / 7);
+        width: 138px;
+        @include sp {
+            width: calc(100% / 2);
+            padding-left: calc((50vw - 16px) / 2 - 40px);
+        }
+        // flex: 1;
+        &:hover {
+            background-color: #eee;
+        }
+        &.is-active {
+            background-color: rgba(14,127,227, 0.1);
+            // color: #fff;
+            &::before {
+                width: 100%;
+            }
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: rgb(14, 127, 227);
+            transition: all 0.2s linear;
+        }
+        &:hover::before {
+            width: 100%;
+        }
+        &__icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+            margin-right: 6px;
+            @include sp {
+                // width: calc(100% / 2);
+                // width: 50%;
+            }
+        }
+    }
+    &-filter {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 20px 0 20px 0;
+        &__item {
+            // flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 14px 20px;
+            transition: all 0.2s linear;
+            width: 133px;
+            &:hover {
+                background-color: #f3701a;
+                color: #fff;
+            }
+            &.increase {
+                background-color: #03cd01;
+                color: #fff;
+            }
+            &.decrease {
+                background-color: #fe2c5d;
+                color: #fff;
+            }
+
+            &--txt {
+                margin-right: 12px;
+            }
+            &--type {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+    &-intro {
+        display: flex;
+        span {
+            margin-right: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+    &-search {
+        display: flex;
+        width: 100%;
+        margin-bottom: 20px;
+        @include sp {
+            flex-direction: column;
+        }
+        input {
+            flex: 1;
+        }
+        select {
+            width: 250px;
+            margin-left: 12px;
+            margin-right: 12px;
+            @include sp {
+                margin-left: 0;
+                margin-right: 0;
+                margin-top: 6px;
+                margin-bottom: 6px;
+                width: 100%;
+            }
+        }
+        button {
+            // border: none;
+            // outline: none;
+            // background-color: blue;
+            width: 200px;
+            @include sp {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@keyframes barAnim {
+    from {
+        width: 0;
+    }
+}
+@keyframes barAnimWhite {
+    to {
+        // left: calc(var(--width) - 10px);
+        left: 120%;
+    }
+}
