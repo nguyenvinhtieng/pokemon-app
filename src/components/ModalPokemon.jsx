@@ -5,7 +5,7 @@ import ModalPokemonSkeleton from './ModalPokemonSkeleton';
 const API_IMG = "https://api.eien-development.com/api/pokemon-api/pokemons/:id/sprite"
 const API_DATA ="https://api.eien-development.com/api/pokemon-api/pokemons/:id"
 
-export default function ModalPokemon({isShowModal, setIsShowModal, currentPokemonId, types, top, left}) {
+export default function ModalPokemon({isShowModal, setIsShowModal, currentPokemonId, types, top, left, setPokemonImageToGlobal}) {
   const [pokemon, setPokemon] = useState(null);
   const [pokemonImage, setPokemonImage] = useState("/images/ball.png");
   const [isFetchingPokemon, setIsFetchingPokemon] = useState(false);
@@ -22,6 +22,7 @@ export default function ModalPokemon({isShowModal, setIsShowModal, currentPokemo
         })
         .then(blob => {
           const imageUrl = URL.createObjectURL(blob);
+          setPokemonImageToGlobal({pokemon_id: currentPokemonId, image: imageUrl})
           setPokemonImage(imageUrl);
         })
         .catch(err => {

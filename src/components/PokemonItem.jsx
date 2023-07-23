@@ -5,9 +5,14 @@ const API_IMG = "https://api.eien-development.com/api/pokemon-api/pokemons/:id/s
 
 const pokemonTypes = {}
 
-export default function PokemonItem({pokemon, handleClick, types}) {
-    const [pokemonImage, setPokemonImage] = useState("/images/ball.png");
+export default function PokemonItem({pokemon, handleClick, types, pokemonImages}) {
+    // const [pokemonImage, setPokemonImage] = useState("/images/ball.png");
     const pokemonRef = useRef(null);
+    let pokemonImage = "/images/ball.png";
+    const pokemonFind = pokemonImages.find(pokemonImage => pokemonImage.pokemon_id === pokemon.id);
+    if(pokemonFind) {
+        pokemonImage = pokemonFind.image;
+    }
     const handleClickItem = () => {
         const {x, y} = pokemonRef.current.getBoundingClientRect();
         handleClick({id: pokemon.id, top: y, left: x});
