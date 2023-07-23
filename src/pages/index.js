@@ -84,6 +84,7 @@ export default function Home() {
   }, [])
 
   const handleChooseType = (typeId) => {
+    if(isFetching) return
     setFilterCondition({
       ...filterCondition,
       type: typeId
@@ -109,6 +110,7 @@ export default function Home() {
   }, [sortCondition])
 
   const handleChangeSortProperty = (type) => {
+    if(isFetching) return
     if(sortCondition[type] === "no-sort") {
       setSortCondition({
         ...sortCondition,
@@ -128,6 +130,7 @@ export default function Home() {
   }
 
   const handleSearch = () => {
+    if(isFetching) return
     let pokemonName = inputSearchRef.current.value
     let pokemonLegendary = selectSearchRef.current.value
     let objSearch = {}
