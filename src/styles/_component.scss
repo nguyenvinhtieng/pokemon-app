@@ -167,6 +167,9 @@
         outline: none;
         border-color: #00A97F;
     }
+    @include sp {
+        font-size: 15px;
+    }
 }
 .c-select-01 {
     border: 1px solid #ccc;
