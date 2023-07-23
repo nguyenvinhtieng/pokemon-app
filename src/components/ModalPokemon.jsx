@@ -56,7 +56,7 @@ export default function ModalPokemon({isShowModal, setIsShowModal, currentPokemo
         <span className="modal__overlay" onClick={handleCloseModal}></span>
           {isFetchingPokemon && <div className="modal__container"><ModalPokemonSkeleton /></div>}
 
-          {!isFetchingPokemon && pokemon && <div className={`modal__container ${pokemon?.legendary == 1 ? "legendary large" : ""}`} style={{"--x": `${top}px`, "--y": `${left}px`}}>
+          <div className={`modal__container ${pokemon?.legendary == 1 ? "legendary large" : ""} ${isFetchingPokemon ? "is-loading" : ""}`} style={{"--x": `${top}px`, "--y": `${left}px`}}>
             <div className="modal__inner pokemon">
               <div className='pokemon__img large pokemon__img-anim'>
                   <img src={pokemonImage} />
@@ -137,7 +137,7 @@ export default function ModalPokemon({isShowModal, setIsShowModal, currentPokemo
                 </a>
               </span>
             </div> 
-          </div>}
+          </div>
 
           {!isFetchingPokemon && !pokemon && <div className="modal__container">Not found Pokemon</div>}
       </div>

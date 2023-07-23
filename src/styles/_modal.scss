@@ -40,6 +40,9 @@
         // left: var(--y);
         transform: translate(-50%, -50%);
         // animation: showModalAnimation 0.2s linear forwards;
+        &.is-loading {
+            display: none;
+        }
     }
     &__inner {
         width: 100%;
