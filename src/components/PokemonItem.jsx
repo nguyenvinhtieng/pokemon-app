@@ -14,7 +14,7 @@ export default function PokemonItem({pokemon, handleClick, types}) {
     }
     return (
     <div ref={pokemonRef} className={`p-list__item pokemon ${pokemon.legendary === 1 ? "legendary" : ""}`} onClick={handleClickItem}>
-        <div className='`p-list__inner'>
+        <div className='p-list__inner'>
             <div className='pokemon__img'>
                 <img src={pokemonImage} />
             </div>

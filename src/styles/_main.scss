@@ -22,6 +22,7 @@ body {
         margin: 0 0 -40px 0;
     }
     &__item {
+        overflow: hidden;
         cursor: pointer;
         width: calc(100% / 3 - 40px);
         margin: 20px 20px;
@@ -29,6 +30,7 @@ body {
         padding: 20px;
         position: relative;
         border-radius: 10px;
+        border: 2px solid transparent;
         @media (max-width: 1000px) {
             width: calc(100% / 2 - 40px);
         }
@@ -36,7 +38,35 @@ body {
             width: calc(100%);
             margin: 0 0 40px 0;
         }
-        
+        &:hover {
+            border: 2px solid #eee;
+            .p-list__inner::before {
+                opacity: 1;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                width: 150px;
+                height: 180%;
+                background: linear-gradient(#00ccff, #d400d4);
+                z-index: -1;
+                animation: bgRotateAnim 4s linear infinite;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                bottom: 4px;
+                right: 4px;
+                z-index: -1;
+                background-color: #fff;
+                border-radius: 10px;
+            }
+        }
     }
     &__inner {
         z-index: 1;
@@ -46,10 +76,30 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
+        position: relative;
+        z-index: 10;
+        &::before {
+            content: "";
+            opacity: 0;
+            position: absolute;
+            top: -20px;
+            bottom: -20px;
+            width: 200px;
+            background-color: rgba(130, 167, 255, 0.05);
+            transform: skewX(-25deg);
+            right: calc(100% + 200px);
+            animation: animBg 1s linear infinite;
+        }
     }
 }
-
+@keyframes animBg {
+    0% {
+        right: calc(100% + 200px);
+    }
+    100% {
+        right: -200px;
+    }
+}
 @keyframes colorTransition {
     0% {
         background-position: 0% 50%;
@@ -61,7 +111,17 @@ body {
         background-position: 0% 50%;
     }
 }
-
+@keyframes colorTransition2 {
+    0% {
+        background-position: 50% 0%;
+    }
+    50% {
+        background-position: 50% 100%;
+    }
+    100% {
+        background-position: 50% 0%;
+    }
+}
 @keyframes bgRotateAnim {
     0% {
         transform: translate(-50%, -50%) rotate(0deg);
@@ -80,32 +140,49 @@ body {
 .legendary {
     position: relative;
     overflow: hidden;
-    // background-color: #eee;
+    background: linear-gradient(#00ccff, #d400d4);
+    border: none;
+    color: #fff;
+    transition: all 0.2s linear;
+    &:hover {
+        border: none;
+        background-size: 300% 300%;
+        animation: colorTransition2 2s ease-in-out infinite;
+        box-shadow: rgba(149, 157, 165, 0.6) 0px 8px 24px;
+    }
     .pokemon__id {
-        color: #000;
+        color: #fff;
+    }
+    .pokemon__name {
+        color: #fff;
     }
     &.large {
+        background-color: #fff !important;
+        color: #000 !important;
         &::before {
             height: 200%;
+            opacity: 1;
         }
         &::after {
             top: 8px;
             left: 8px;
             bottom: 8px;
             right: 8px;
+            opacity: 1;
         }
     }
     &::before {
         content: "";
         position: absolute;
         width: 150px;
-        height: 140%;
+        height: 180%;
         background: linear-gradient(#00ccff, #d400d4);
         z-index: -1;
         animation: bgRotateAnim 4s linear infinite;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        opacity: 0;
     }
     &::after {
         content: "";
@@ -117,6 +194,7 @@ body {
         z-index: -1;
         background-color: #fff;
         border-radius: 10px;
+        opacity: 0;
     }
 }
 
