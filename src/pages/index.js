@@ -7,6 +7,7 @@ import ToolTip from '@/components/ToolTip'
 import Skeleton from '@/components/Skeleton'
 import PokemonItemSkeleton from '@/components/PokemonItemSkeleton'
 import HeadMeta from '@/components/HeadMeta'
+import Pagination from '@/components/Pagination'
 
 const API_URL = "https://api.eien-development.com/api/pokemon-api/pokemons/"
 // const API_URL = "https://api.eien-development.com/api/pokemon-api/pokemons?filter[legendary]=1"
@@ -33,6 +34,7 @@ export default function Home() {
     max_defense: '',
     min_attack: '',
     max_attack: '',
+    page: 1,
     // sort: '', // created_at || updated_at
   })
   const [sortCondition, setSortCondition] = useState({
@@ -44,6 +46,9 @@ export default function Home() {
     speed: "no-sort",
     number: "no-sort",
   })
+
+  const [pages, setPages] = useState({})
+
   const inputSearchRef = useRef(null)
   const selectSearchRef = useRef(null)
 
@@ -51,6 +56,7 @@ export default function Home() {
     setIsFetching(true)
     const res = await fetch(url)
     const data = await res.json()
+    setPages(data.meta)
     setPokemons(data.data)
     setIsFetching(false)
   }
@@ -154,6 +160,13 @@ export default function Home() {
     }
   }
 
+  const onChangePage = (page) => {
+    setFilterCondition({
+      ...filterCondition,
+      page: page
+    })
+  }
+
   return (
     <>
       <HeadMeta />
@@ -162,6 +175,8 @@ export default function Home() {
           <h1 className="c-ttl-01">
             Explore your pokemons
           </h1>
+          
+
           <div className="pokemon-search">
             <input ref={inputSearchRef} type="text" placeholder="Search your pokemon" className="pokemon-search__input c-input-01"/>
             <select className='c-select-01' ref={selectSearchRef}>
@@ -220,9 +235,9 @@ export default function Home() {
             {filterCondition.name !== '' && <span>Name: <span className='u-fw-b'>{filterCondition.name}</span><br/></span>}
             {filterCondition.legendary !== '' && <span>Legendary: <span className='u-fw-b'>{filterCondition.legendary == 1 ? "Legendary" : "Not Legendary"}</span><br/></span>}
             {filterCondition.type !== '' && <span>Type: <span className='u-fw-b'>{types.find((type) => type.id == filterCondition.type)?.name}</span><br/></span>}
-              
           </p>}
-          
+
+          <Pagination pages={pages} onChangePage={onChangePage}/>
         </div>
       </div>
     </>

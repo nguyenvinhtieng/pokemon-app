@@ -3,14 +3,14 @@
 function shuffleArray<T>(array: T[]): T[] {
     let arrayLength: number = array.length;
     for (let i = 0; i < arrayLength; i++) {
-        const j: number = Math.floor(Math.random() * arrayLength); // get random index
-        [array[i], array[j]] = [array[j], array[i]]; // swap element at index i and j
+        const j: number = Math.floor(Math.random() * arrayLength);
+        [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
 }
 
 function divideIntoGroups<T>(characters: T[]): T[][] {
-    const MAXIMUM_GROUP_SIZE: number = 4; // maximum group size
+    const MAXIMUM_GROUP_SIZE: number = 3; // maximum group size
     const arrayLength: number = characters.length; // get lenght of array to be not call length function every time
     if (characters.length === 0) return []; // CASE: empty array  => return empty array
 
@@ -26,18 +26,31 @@ function divideIntoGroups<T>(characters: T[]): T[][] {
     }
     
     // Choose the group size that has less remainders
-    let minValue: number = groupSizes[0];
-    let minIndex: number = 0;
-    for (let i = 1; i < groupSizes.length; i++) {
-        if (groupSizes[i] <= minValue) {
-            minValue = groupSizes[i];
+    let remainders: number = 0;
+    let minIndex: number = -1;
+    let maxValue: number = 0;
+    let maxIndex: number = -1;
+
+    for (let i = 0; i < groupSizes.length; i++) {
+        if (groupSizes[i] == 0) {
             minIndex = i;
         }
+        if(groupSizes[i] >= maxValue) {
+            maxValue = groupSizes[i];
+            maxIndex = i;
+        }
     }
-    
+
+    if(minIndex != -1) {
+        remainders = minIndex;
+    } else {
+        remainders = maxIndex;
+    }
+
+
     // get last index of min value
 
-    const GROUP_ITEM_SIZE: number = minIndex + 2;
+    const GROUP_ITEM_SIZE: number = remainders + 2;
 
     // CALCULATE GROUP SIZE
     const groupSize = Math.ceil(arrayLength / GROUP_ITEM_SIZE);
@@ -59,7 +72,7 @@ function divideIntoGroups<T>(characters: T[]): T[][] {
 
 (function main() {
     const characters1: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-    const characters2: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+    const characters2: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
     const groups1: string[][] = divideIntoGroups(characters1);
     const groups2: string[][] = divideIntoGroups(characters2);
     console.log(groups1);
