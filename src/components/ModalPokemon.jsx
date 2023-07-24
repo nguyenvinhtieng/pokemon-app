@@ -16,20 +16,32 @@ export default function ModalPokemon({isShowModal, setIsShowModal, currentPokemo
     if (currentPokemonId) {
       setIsFetchingPokemon(true)
       setIsFetchingImage(true)
-      fetch(API_IMG.replace(":id", currentPokemonId))
+      // fetch(API_IMG.replace(":id", currentPokemonId))
+      //   .then(response => {
+      //     return response.blob();
+      //   })
+      //   .then(blob => {
+      //     const imageUrl = URL.createObjectURL(blob);
+      //     setPokemonImageToGlobal({pokemon_id: currentPokemonId, image: imageUrl})
+      //     setPokemonImage(imageUrl);
+      //     console.log("fetch: ", imageUrl)
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   })
+      //   .finally(() => {
+      //     setIsFetchingImage(false);
+      //   })
+      
+      axios.get(API_IMG.replace(":id", currentPokemonId), {responseType: 'blob'})
         .then(response => {
-          return response.blob();
-        })
-        .then(blob => {
+          const blob = response.data;
           const imageUrl = URL.createObjectURL(blob);
           setPokemonImageToGlobal({pokemon_id: currentPokemonId, image: imageUrl})
           setPokemonImage(imageUrl);
         })
         .catch(err => {
           console.log(err);
-        })
-        .finally(() => {
-          setIsFetchingImage(false);
         })
 
       axios.get(API_DATA.replace(":id", currentPokemonId))
