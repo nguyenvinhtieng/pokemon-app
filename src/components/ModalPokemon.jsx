@@ -43,6 +43,9 @@ export default function ModalPokemon({isShowModal, setIsShowModal, currentPokemo
         .catch(err => {
           console.log(err);
         })
+        .finally(() => {
+          setIsFetchingImage(false);
+        })
 
       axios.get(API_DATA.replace(":id", currentPokemonId))
         .then(res => {
